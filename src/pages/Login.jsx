@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
+import Button from "../components/Button";
 import { Eye, EyeOff } from "lucide-react";
 
 export default function Login() {
@@ -19,7 +20,7 @@ export default function Login() {
             await login(email, password);
             navigate("/");
         } catch (err) {
-            let message = "Login gagal";
+            let message = "Login failed";
             if (err.response?.data?.message) {
                 message = err.response.data.message;
             } else if (err.message) {
@@ -69,6 +70,7 @@ export default function Login() {
                     </button>
                 </div>
 
+                <Button type="submit">Login</Button>
             </form>
         </div>
     );
