@@ -1,36 +1,26 @@
-import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import AuthContext from "../context/AuthContext";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+import ModalError from "../components/ModalError";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    const navigate = useNavigate();
-    const { login } = useContext(AuthContext);
-    const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+
+    const {
+        login,
+        loading,
+        error,
+        valError,
+        clearError
+    } = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            setLoading(true);
-            await login(email, password);
-            navigate("/");
-        } catch (err) {
-            let message = "Login failed";
-            if (err.response?.data?.message) {
-                message = err.response.data.message;
-            } else if (err.message) {
-                message = err.message;
-            }
-            setError(message);
-        } finally {
-            setLoading(false);
-        }
+        await login(email, password);
     };
 
     return (
@@ -40,7 +30,7 @@ export default function Login() {
                 className="p-6 bg-white shadow-md rounded w-80 relative"
             >
                 <h1 className="text-xl mb-4">Login</h1>
-                {error && <p className="text-red-500">{error}</p>}
+                {valError && <p className="text-red-500">{valError}</p>}
                 <input
                     type="email"
                     name="email"
@@ -71,6 +61,12 @@ export default function Login() {
                 <Link to="/register" className="text-blue-500 hover:underline">Register Account</Link>
                 <Button type="submit" loading={loading} disabled={loading} className="mt-2 w-full">Login</Button>
             </form>
+            {error && (
+                <ModalError
+                    message={error}
+                    onClose={clearError}
+                />
+            )}
         </div>
     );
 }

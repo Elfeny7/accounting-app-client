@@ -1,20 +1,10 @@
 import { useState, useEffect } from "react";
 import AuthContext from "./AuthContext";
-import { fetchUser, loginAndStore, registerAndStore, clearAuth } from "../services/authService";
+import { fetchUser, clearAuth } from "../services/authService";
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-
-    const register = async (name, email, password, passwordConfirmation) => {
-        const user = await registerAndStore(name, email, password, passwordConfirmation);
-        setUser(user);
-    }
-
-    const login = async (email, password) => {
-        const user = await loginAndStore(email, password);
-        setUser(user);
-    };
 
     const logout = () => {
         clearAuth();
@@ -38,7 +28,7 @@ export function AuthProvider({ children }) {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user, login, register, logout, loading }}>
+        <AuthContext.Provider value={{ user, setUser, loading }}>
             {children}
         </AuthContext.Provider>
     );
