@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar';
 import LandingPage from './pages/Dashboard';
 import Transaction from './pages/Transaction';
 import { Routes, Route } from "react-router-dom";
+import Report from './pages/Report';
 import ProtectedRoute from './routes/ProtectedRoute';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route element={<ProtectedRoute><Sidebar /></ProtectedRoute>}>
           <Route path="/" element={<LandingPage />} />
           <Route path="/transactions" element={<Transaction />} />
+          <Route path="/report" element={<Report />} />
         </Route>
       </Routes>
     </>

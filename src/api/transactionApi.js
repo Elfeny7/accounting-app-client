@@ -15,3 +15,8 @@ export const updateTransaction = async (id, payload) => {
 export const deleteTransaction = async (id) => {
   await api.delete(`/transactions/${id}`);
 };
+
+export const dailyReport = async (date) => {
+  const res = await api.get(`/report/daily/${date}`);
+  return res.data.data;
+}

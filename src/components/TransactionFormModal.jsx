@@ -20,7 +20,7 @@ export default function TransactionFormModal({
 
                 <form onSubmit={handleSubmit} className="space-y-2">
                     <input
-                        type="text"
+                        type="date"
                         name="transaction_date"
                         placeholder="Transaction Date"
                         value={form.transaction_date}

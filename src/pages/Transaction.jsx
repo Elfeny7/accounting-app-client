@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTransactions } from "../hooks/useTransactions";
 import { useFilterSortTransaction } from "../hooks/useFilterSortTransaction";
+import { useNavigate } from "react-router-dom";
 import ModalError from "../components/ModalError";
 import ModalConfirm from "../components/ModalConfirm";
 import Pagination from "../components/Pagination";
@@ -8,8 +9,10 @@ import Search from "../components/Search";
 import Button from "../components/Button";
 import TransactionTable from "../components/TransactionTable";
 import TransactionFormModal from "../components/TransactionFormModal";
+import ReportDateModal from "../components/ReportDateModal";
 
 export default function Transaction() {
+    const navigate = useNavigate();
     const [isEditing, setIsEditing] = useState(false);
     const [search, setSearch] = useState("");
     const [sortField, setSortField] = useState("id");
@@ -17,6 +20,7 @@ export default function Transaction() {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [reportModalOpen, setReportModalOpen] = useState(false);
     const [confirmOpen, setConfirmOpen] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
     const defaultForm = {
@@ -100,9 +104,20 @@ export default function Transaction() {
                     error={valError}
                 />
             )}
+            {reportModalOpen && (
+                <ReportDateModal
+                    onClose={() => setReportModalOpen(false)}
+                    onSubmit={(date) => {
+                        setReportModalOpen(false);
+                        navigate(`/report?date=${date}`);
+                    }}
+                />
+            )}
+
             <div className="flex items-center justify-between mb-5">
                 <h1 className="text-3xl font-bold">Transaction Management</h1>
                 <div className="flex items-center gap-2">
+                    <Button onClick={() => setReportModalOpen(true)} className="bg-green-600 hover:bg-green-700">Daily Report</Button>
                     <Button onClick={() => setIsModalOpen(true)} >Add Transaction</Button>
                     <Search value={search} onChange={(e) => setSearch(e.target.value)} />
                 </div>

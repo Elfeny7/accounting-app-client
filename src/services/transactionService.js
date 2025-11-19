@@ -45,3 +45,13 @@ export const remove = async (id) => {
   }
 };
 
+export const daily = async (date) => {
+  try {
+    return await transactionApi.dailyReport(date);
+  } catch (err) {
+    const code = err.response?.status || null;
+    const message = err.response?.data?.message || "Failed to get daily report";
+    throw new ApiError(message, code);
+  }
+};
+

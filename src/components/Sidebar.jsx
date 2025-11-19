@@ -13,7 +13,7 @@ export default function Sidebar() {
 
     const menuItems = [
         { path: "/", label: "Dashboard", icon: <House size={20} /> },
-        { path: "/users", label: "Users", icon: <Users size={20} /> },
+        // { path: "/users", label: "Users", icon: <Users size={20} /> },
         { path: "/transactions", label: "Transactions", icon: <CircleDollarSign size={20} /> },
     ];
 
