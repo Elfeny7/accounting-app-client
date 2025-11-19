@@ -19,21 +19,24 @@ export default function Register() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError(null);
         try {
             setLoading(true);
             await register(name, email, password, passwordConfirmation);
             navigate("/");
         } catch (err) {
             let message = "Register failed";
-            if (err.response?.data?.message) {
-                message = err.response.data.message;
+            if (err.response?.data?.reason) {
+                const reason = err.response.data.reason;
+                const firstKey = Object.keys(reason)[0]; // contoh: "email"
+                message = reason[firstKey][0];
             } else if (err.message) {
                 message = err.message;
             }
             setError(message);
         } finally {
             setLoading(false);
-        }
+        } 
     };
 
     return (
@@ -43,7 +46,7 @@ export default function Register() {
                 className="p-6 bg-white shadow-md rounded w-80 relative"
             >
                 <h1 className="text-xl mb-4">Register</h1>
-                {error && <p className="text-red-500">{error}</p>}
+                {error && <p className="text-red-500 mb-2">{error}</p>}
                 <input
                     type="text"
                     name="name"
