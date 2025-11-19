@@ -30,7 +30,6 @@ export default function Login() {
                 className="p-6 bg-white shadow-md rounded w-80 relative"
             >
                 <h1 className="text-xl mb-4">Login</h1>
-                {valError && <p className="text-red-500">{valError}</p>}
                 <input
                     type="email"
                     name="email"
@@ -40,6 +39,9 @@ export default function Login() {
                     disabled={loading}
                     className="p-3 w-full rounded-lg bg-gray-200 focus:border-0 focus:ring-1 focus:ring-gray-400 focus:outline-none disabled:opacity-70 disabled:cursor-not-allowed mb-2"
                 />
+                {valError?.email && (
+                    <p className="text-red-500 text-sm mb-2">{valError.email[0]}</p>
+                )}
                 <div className="relative mb-2">
                     <input
                         type={showPassword ? "text" : "password"}
@@ -58,6 +60,9 @@ export default function Login() {
                         {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                     </button>
                 </div>
+                {valError?.password && (
+                    <p className="text-red-500 text-sm mb-2">{valError.password[0]}</p>
+                )}
                 <Link to="/register" className="text-blue-500 hover:underline">Register Account</Link>
                 <Button type="submit" loading={loading} disabled={loading} className="mt-2 w-full">Login</Button>
             </form>
