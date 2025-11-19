@@ -26,10 +26,11 @@ export default function TransactionTable({
             <thead className="bg-blue-200 text-gray-700 border border-blue-300 uppercase text-xs">
                 <tr>
                     <th onClick={() => toggleSort("id")} className="w-[5%] p-2 py-3 text-center cursor-pointer hover:bg-blue-300">ID {getSortIcon("id")}</th>
-                    <th onClick={() => toggleSort("transaction_date")} className="w-[15%] p-2 text-center cursor-pointer hover:bg-blue-300">Transaction Date {getSortIcon("transaction_date")}</th>
-                    <th onClick={() => toggleSort("type")} className="w-[15%] p-2 text-center cursor-pointer hover:bg-blue-300">Type {getSortIcon("type")}</th>
-                    <th onClick={() => toggleSort("description")} className="w-[35%] p-2 text-center cursor-pointer hover:bg-blue-300">Description {getSortIcon("description")}</th>
+                    <th onClick={() => toggleSort("transaction_date")} className="w-[10%] p-2 text-center cursor-pointer hover:bg-blue-300">Transaction Date {getSortIcon("transaction_date")}</th>
+                    <th onClick={() => toggleSort("type")} className="w-[10%] p-2 text-center cursor-pointer hover:bg-blue-300">Type {getSortIcon("type")}</th>
+                    <th onClick={() => toggleSort("description")} className="w-[25%] p-2 text-center cursor-pointer hover:bg-blue-300">Description {getSortIcon("description")}</th>
                     <th onClick={() => toggleSort("amount")} className="w-[10%] p-2 text-center cursor-pointer hover:bg-blue-300">Amount {getSortIcon("amount")}</th>
+                    <th onClick={() => toggleSort("created_by")} className="w-[10%] p-2 text-center cursor-pointer hover:bg-blue-300">Created By {getSortIcon("created_by")}</th>
                     <th className="w-[10%] p-2 text-center">Action</th>
                 </tr>
             </thead>
@@ -42,6 +43,7 @@ export default function TransactionTable({
                             <td className="p-2 text-center">{t.type}</td>
                             <td className="p-2">{t.description}</td>
                             <td className="p-2 text-center">{t.amount}</td>
+                            <td className="p-2 text-center">{t.created_by}</td>
                             <td className="p-2 space-x-4 text-center">
                                 <button onClick={() => onEdit(t)} disabled={loading} className="cursor-pointer">
                                     <SquarePen size={20} />

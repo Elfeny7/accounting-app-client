@@ -24,6 +24,7 @@ export default function Transaction() {
         type: "income",
         description: "",
         amount: "",
+        created_by: "",
     };
     const [form, setForm] = useState(defaultForm);
 
