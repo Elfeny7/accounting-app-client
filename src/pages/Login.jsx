@@ -38,32 +38,35 @@ export default function Login() {
                 onSubmit={handleSubmit}
                 className="p-6 bg-white shadow-md rounded w-80 relative"
             >
-                <h1 className="text-xl mb-4">Login Admin</h1>
+                <h1 className="text-xl mb-4">Login</h1>
                 {error && <p className="text-red-500">{error}</p>}
                 <input
                     type="email"
+                    name="email"
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="border p-2 w-full mb-2 rounded"
+                    disabled={loading}
+                    className="p-3 w-full rounded-lg bg-gray-200 focus:border-0 focus:ring-1 focus:ring-gray-400 focus:outline-none disabled:opacity-70 disabled:cursor-not-allowed mb-2"
                 />
-                <div className="relative">
+                <div className="relative mb-2">
                     <input
                         type={showPassword ? "text" : "password"}
+                        name="password"
                         placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="border p-2 w-full mb-2 rounded pr-10"
+                        disabled={loading}
+                        className="p-3 w-full rounded-lg bg-gray-200 focus:border-0 focus:ring-1 focus:ring-gray-400 focus:outline-none disabled:opacity-70 disabled:cursor-not-allowed"
                     />
                     <button
                         type="button"
-                        onClick={() => setShowPassword(!showPassword)}
                         className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
+                        onClick={() => setShowPassword(!showPassword)}
                     >
                         {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                     </button>
                 </div>
-
                 <Button type="submit" loading={loading}>Login</Button>
             </form>
         </div>
