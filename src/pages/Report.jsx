@@ -1,9 +1,12 @@
-// Report.jsx
+import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useReport } from "../hooks/useReport";
 import ModalError from "../components/ModalError";
 
 export default function Report() {
+    const [params] = useSearchParams();
+    const date = params.get("date");
+
     const {
         report,
         loading,
@@ -13,7 +16,7 @@ export default function Report() {
     } = useReport();
 
     useEffect(() => {
-        fetchDailyReport("2025-10-08"); // fetch otomatis sekali
+        if (date) fetchDailyReport(date);
     }, []);
 
     if (loading) return <p className="text-gray-600">Loading...</p>;
