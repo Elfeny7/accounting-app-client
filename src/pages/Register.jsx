@@ -99,7 +99,7 @@ export default function Register() {
                     </button>
                 </div>
                 <Link to="/login" className="text-blue-500 hover:underline">Login</Link>
-                <Button type="submit" loading={loading} disabled={loading} className="mt-2 w-full">Login</Button>
+                <Button type="submit" loading={loading} disabled={loading} className="mt-2 w-full">Register</Button>
             </form>
         </div>
     );
