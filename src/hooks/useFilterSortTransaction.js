@@ -16,7 +16,7 @@ export const useFilterSortTransaction = ({
                 transactions.transaction_date.toLowerCase().includes(searchTerm) ||
                 transactions.type.toLowerCase().includes(searchTerm) ||
                 transactions.description.toLowerCase().includes(searchTerm) ||
-                transactions.amount.toLowerCase().includes(searchTerm)
+                transactions.amount.toString().includes(searchTerm)
             );
         });
     }, [transactions, search]);
