@@ -16,7 +16,7 @@ export default function ReportDateModal({ onClose, onSubmit }) {
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <input
                         type="date"
-                        className="border w-full p-2 rounded"
+                        className="p-3 w-full rounded-lg bg-gray-200 focus:border-0 focus:ring-1 focus:ring-gray-400 focus:outline-none disabled:opacity-70 disabled:cursor-not-allowed"
                         value={date}
                         onChange={(e) => setDate(e.target.value)}
                         required
