@@ -1,35 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { daily } from "../services/transactionService";
 
-export function useReport() {
+export function useReport(date) {
     const [report, setReport] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [initialLoading, setInitialLoading] = useState(true);
     const [error, setError] = useState("");
 
-    const fetchDailyReport = async (date) => {
-        try {
-            setLoading(true);
-            setError("");
+    useEffect(() => {
+        const fetchDailyReport = async () => {
+            try {
+                const data = await daily(date);
+                setReport(data);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setInitialLoading(false);
+            }
+        };
 
-            const data = await daily(date);
-            setReport(data);
-        } catch (err) {
-            setError("Failed to fetch daily report");
-        } finally {
-            setLoading(false);
-        }
-    };
+        fetchDailyReport();
+    }, [date]);
 
     const clearReport = () => {
         setReport(null);
-        setError("");
+        setError(null);
     };
 
     return {
         report,
-        loading,
+        initialLoading,
         error,
-        fetchDailyReport,
         clearReport
     };
 }

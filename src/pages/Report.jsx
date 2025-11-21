@@ -1,5 +1,4 @@
 import { useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
 import { useReport } from "../hooks/useReport";
 import ModalError from "../components/ModalError";
 
@@ -9,19 +8,16 @@ export default function Report() {
 
     const {
         report,
-        loading,
+        initialLoading,
         error,
-        fetchDailyReport,
         clearReport
-    } = useReport();
+    } = useReport(date);
 
-    useEffect(() => {
-        if (date) fetchDailyReport(date);
-    }, []);
-
-    if (loading) return <p className="text-gray-600">Loading...</p>;
-    if (error) return <p className="text-red-600">{error}</p>;
-    if (!report) return null;
+    if (initialLoading) return (
+        <div className="flex items-center justify-center h-screen">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
+    );
 
     return (
         <div className="max-w-md mx-auto mt-6 p-6 bg-white shadow rounded">
