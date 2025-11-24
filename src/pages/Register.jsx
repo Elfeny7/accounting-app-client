@@ -26,28 +26,6 @@ export default function Register() {
         await register(name, email, password, passwordConfirmation);
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     setError(null);
-    //     try {
-    //         setLoading(true);
-    //         await register(name, email, password, passwordConfirmation);
-    //         navigate("/");
-    //     } catch (err) {
-    //         let message = "Register failed";
-    //         if (err.response?.data?.reason) {
-    //             const reason = err.response.data.reason;
-    //             const firstKey = Object.keys(reason)[0]; // contoh: "email"
-    //             message = reason[firstKey][0];
-    //         } else if (err.message) {
-    //             message = err.message;
-    //         }
-    //         setError(message);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
-
     return (
         <div className="flex h-screen bg-gray-100 justify-center items-center">
             <form

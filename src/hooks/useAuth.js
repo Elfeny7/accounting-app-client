@@ -16,7 +16,7 @@ export const useAuth = () => {
             const user = await registerAndStore(name, email, password, passwordConfirmation);
             setUser(user);
         } catch (err) {
-            if (err.code === 422) setValError(err.reason);
+            if (err.code === 422) setValError(err.error);
             else setError(err.message);
         } finally {
             setLoading(false);
@@ -30,7 +30,7 @@ export const useAuth = () => {
             setUser(user);
             navigate("/");
         } catch (err) {
-            if (err.code === 422) setValError(err.reason);
+            if (err.code === 422) setValError(err.error);
             else setError(err.message);
         } finally {
             setLoading(false);

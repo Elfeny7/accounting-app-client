@@ -19,8 +19,8 @@ export const loginAndStore = async (email, password) => {
   } catch (err) {
     const code = err.response?.status || null;
     const message = err.response?.data?.message || "Failed to login";
-    const reason = err.response?.data?.reason || null;
-    throw new ApiError(message, code, reason);
+    const error = err.response?.data?.error || null;
+    throw new ApiError(message, code, error);
   }
 };
 
@@ -32,8 +32,8 @@ export const registerAndStore = async (name, email, password, passwordConfirmati
   } catch (err) {
     const code = err.response?.status || null;
     const message = err.response?.data?.message || "Failed to register";
-    const reason = err.response?.data?.reason || null;
-    throw new ApiError(message, code, reason);
+    const error = err.response?.data?.error || null;
+    throw new ApiError(message, code, error);
   }
 };
 

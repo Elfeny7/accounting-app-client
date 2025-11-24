@@ -20,42 +20,52 @@ export default function Report() {
     );
 
     return (
-        <div className="max-w-md mx-auto mt-6 p-6 bg-white shadow rounded">
-            <h2 className="text-xl font-bold mb-4">Daily Report</h2>
+        <div className="p-6 flex justify-center">
+            <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6 space-y-6 border border-gray-100">
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                    Daily Report
+                </h2>
 
-            <div className="space-y-3">
-                <div>
-                    <label className="font-semibold">Date:</label>
-                    <p>{report.date}</p>
+                <div className="space-y-4">
+                    <div className="flex justify-between">
+                        <span className="text-gray-500 font-medium">Date</span>
+                        <span className="font-semibold text-gray-800">
+                            {report.date}
+                        </span>
+                    </div>
+
+                    <div className="flex justify-between">
+                        <span className="text-gray-500 font-medium">Total Income</span>
+                        <span className="text-green-600 font-semibold">
+                            Rp {report.total_income.toLocaleString()}
+                        </span>
+                    </div>
+
+                    <div className="flex justify-between">
+                        <span className="text-gray-500 font-medium">Total Expense</span>
+                        <span className="text-red-500 font-semibold">
+                            Rp {report.total_expense.toLocaleString()}
+                        </span>
+                    </div>
+
+                    <div className="flex justify-between border-t pt-4 mt-2">
+                        <span className="text-gray-700 font-semibold text-lg">
+                            Balance
+                        </span>
+                        <span className="font-bold text-lg text-gray-900">
+                            Rp {report.balance.toLocaleString()}
+                        </span>
+                    </div>
                 </div>
 
-                <div>
-                    <label className="font-semibold">Total Income:</label>
-                    <p className="text-green-600 font-medium">
-                        Rp {report.total_income.toLocaleString()}
-                    </p>
-                </div>
-
-                <div>
-                    <label className="font-semibold">Total Expense:</label>
-                    <p className="text-red-600 font-medium">
-                        Rp {report.total_expense.toLocaleString()}
-                    </p>
-                </div>
-
-                <div>
-                    <label className="font-semibold">Balance:</label>
-                    <p className="font-bold">
-                        Rp {report.balance.toLocaleString()}
-                    </p>
-                </div>
+                {error && (
+                    <ModalError
+                        message={error}
+                        onClose={clearReport}
+                    />
+                )}
             </div>
-            {error && (
-                <ModalError
-                    message={error}
-                    onClose={clearReport}
-                />
-            )}
         </div>
     );
+
 }

@@ -32,7 +32,7 @@ export const useTransactions = () => {
             toast.success("Create Transaction Success");
         } catch (err) {
             if (err.code == 422)
-                setValError(err.reason);
+                setValError(err.error);
             else
                 setError(err.message || "Failed to create transaction");
         } finally {
@@ -53,7 +53,7 @@ export const useTransactions = () => {
             toast.success("Update Transaction Success");
         } catch (err) {
             if (err.code == 422)
-                setValError(err.reason);
+                setValError(err.error);
             else
                 setError(err.message || "Failed to update transaction");
         } finally {

@@ -18,8 +18,8 @@ export const create = async (payload) => {
   } catch (err) {
     const code = err.response?.status || null;
     const message = err.response?.data?.message || "Failed to create transactions";
-    const reason = err.response?.data?.reason || null;
-    throw new ApiError(message, code, reason);
+    const error = err.response?.data?.error || null;
+    throw new ApiError(message, code, error);
   }
 };
 
@@ -30,8 +30,8 @@ export const update = async (id, payload) => {
   } catch (err) {
     const code = err.response?.status || null;
     const message = err.response?.data?.message || "Failed to update transactions";
-    const reason = err.response?.data?.reason || null;
-    throw new ApiError(message, code, reason);
+    const error = err.response?.data?.error || null;
+    throw new ApiError(message, code, error);
   }
 }
 
