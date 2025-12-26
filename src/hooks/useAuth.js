@@ -1,5 +1,6 @@
 import { loginAndStore, registerAndStore, clearAuth } from "../services/authService";
 import AuthContext from "../context/AuthContext";
+import toast from "react-hot-toast";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +16,8 @@ export const useAuth = () => {
             setLoading(true);
             const user = await registerAndStore(name, email, password, passwordConfirmation);
             setUser(user);
+            toast.success("Register Success");
+            navigate("/");
         } catch (err) {
             if (err.code === 422) setValError(err.error);
             else setError(err.message);
